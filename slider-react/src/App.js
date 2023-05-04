@@ -8,6 +8,8 @@ function App() {
     const [people, setPeople] = React.useState(data)
     const [index, setIndex] = React.useState(0)
 
+    console.log(index)
+
     React.useEffect(() => {
         if (index < 0) {
             setIndex(people.length - 1)
@@ -16,6 +18,15 @@ function App() {
             setIndex(0)
         }
     }, [index, people])
+
+    React.useEffect(() => {
+        let slider = setInterval(() => {
+            setIndex(index + 1)
+        }, 2000)
+        return () => {
+            clearInterval(slider)
+        }
+    }, [index])
 
     const personArticleElements = people.map((person, personIndex) => {
         let position = "nextSlide"
